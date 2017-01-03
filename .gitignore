@@ -1,2 +1,7 @@
 *.pyc
+*.json
 ~*
+!mysite
+bin
+include
+lib
