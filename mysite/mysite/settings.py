@@ -25,7 +25,7 @@ SECRET_KEY = '3b5t0b!0&0-k3#9o*wzaxrxyr=c0ion42h4j@jp@tyqu4f)40!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'polls.apps.PollsConfig',
+    'arch_blog.apps.ArchBlogConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
