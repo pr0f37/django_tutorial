@@ -2,15 +2,17 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import timezone
 from django.core.urlresolvers import reverse
+from django.views import generic
 
 from .models import Post, Comment
 
-def index(request):
-    latest_posts = Post.objects.order_by('-pub_date')[:5]
-    context = {
-        'latest_posts' : latest_posts
-    }
-    return render(request, 'arch_blog/index.html', context)
+
+class IndexView(generic.ListView):
+    template_name = 'arch_blog/index.html'
+    context_object_name = 'latest_posts'
+
+    def get_queryset(self):
+        return Post.objects.order_by('-pub_date')[:5]
      
 def post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
@@ -28,7 +30,7 @@ def comment(request, post_id):
         c.post = post
         c.save()
     except:
-        HttpResponseRedirect(reverse('arch_blog:post', args=(post_id)))
+        HttpResponseRedirect(reverse('arch_blog:index'))
     return HttpResponseRedirect(reverse('arch_blog:post', args=(post_id)))
     
         

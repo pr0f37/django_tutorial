@@ -8,7 +8,6 @@
         {% endfor %}
     </p>
 {% endif %}
-<img src="http://www.hermesc.com/wp-content/uploads/2016/06/abstract-marble-scandinavian-wall-art-interior-design-home-decoration-unique-vintage-style-nice-cool-triangular-shape.jpg"/>
 <center><h4>Comments</h4></center>
 {% if error_message %}<p><strong>{{error_message}}</strong></p>{% endif %}
 <form action="{% url 'arch_blog:comment' post.id %}" method="POST">
