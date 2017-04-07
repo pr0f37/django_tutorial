@@ -22,13 +22,16 @@ def post(request, post_id):
 
 def comment(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    try:              
-        c = Comment()
-        c.body = request.POST['body']
-        c.author = request.POST['author']
-        c.pub_date = timezone.now()
-        c.post = post
-        c.save()
+    try:             
+        if request.POST['body'] == '' or request.POST['author'] == '':
+            HttpResponseRedirect(reverse('arch_blog:post', args=(post_id)))
+        else:
+            c = Comment()
+            c.body = request.POST['body']
+            c.author = request.POST['author']
+            c.pub_date = timezone.now()
+            c.post = post
+            c.save()
     except:
         HttpResponseRedirect(reverse('arch_blog:index'))
     return HttpResponseRedirect(reverse('arch_blog:post', args=(post_id)))

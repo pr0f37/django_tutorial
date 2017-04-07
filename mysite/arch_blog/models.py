@@ -17,6 +17,11 @@ class Post(models.Model):
         return self.tag_set.all()
     def getComments(self):
         return self.comment_set.all()
+    def getAbstract(self):
+        if len(self.body) < 150:
+            return self.body + '...'
+        else:
+            return self.body[:150] + '...'
 
 
 class Comment(models.Model):

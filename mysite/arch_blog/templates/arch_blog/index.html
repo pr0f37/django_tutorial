@@ -1,10 +1,52 @@
-<h1>My blog</h1>
-{% if latest_posts %}
-    <ul>
-    {% for post in latest_posts %}
-        <li><a href="{% url 'arch_blog:post' post.id %}">{{ post.title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No posts are available :(</p>
-{% endif %}
+{% load staticfiles %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'arch_blog/style.css' %}" />
+        <link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet'>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="{% static 'arch_blog/app.js' %}"></script>
+    </head>
+    <body>
+        <div class="header">
+            <div class="positioning">
+                <div class="container">
+                    <a href="{% url 'arch_blog:index' %}"><img src="http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/flipboard/logo.png"/></a>
+                    <ul class="menu">
+                        <li><a href="#">Item1</a></li>
+                        <li><a href="#">Item2</a></li>
+                        <li><a href="#">Item3</a></li>
+                        <li><a href="#">Item4</a></li>
+                        <li class="dropdown-toggle">
+                            <a href="#">More</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">DropdownItem1</a></li>
+                                <li><a href="#">DropdownItem2</a></li>
+                                <li><a href="#">DropdownItem3</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="positioning">
+            <div class="posts">
+            {% if latest_posts %}
+                <ul>
+                {% for post in latest_posts %}
+                    <li class="post">
+                        <p><a href="{% url 'arch_blog:post' post.id %}">{{ post.title }}</a></p>
+                        <div class="extract">{{ post.getAbstract }}</div>
+                        <hr/>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No posts are available :(</p>
+            {% endif %}
+            </div>
+        </div>
+        <div class="tags">
+        Tags:
+        </div>
+    </body>
+</html>
